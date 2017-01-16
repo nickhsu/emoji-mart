@@ -241,6 +241,7 @@ export default class Picker extends React.Component {
     var { perLine, emojiSize, set, sheetSize, style, title, emoji, color, backgroundImageFn } = this.props,
         { skin } = this.state,
         width = (perLine * (emojiSize + 12)) + 12 + 2
+    var native = set === 'native'
 
     return <div style={{...style, width: width}} className='emoji-mart'>
       <div className='emoji-mart-bar'>
@@ -272,6 +273,7 @@ export default class Picker extends React.Component {
             emojiProps={{
               skin: skin,
               size: emojiSize,
+              native: native,
               set: set,
               sheetSize: sheetSize,
               backgroundImageFn: backgroundImageFn,
@@ -291,6 +293,7 @@ export default class Picker extends React.Component {
           emojiProps={{
             size: 38,
             skin: skin,
+            native: native,
             set: set,
             sheetSize: sheetSize,
             backgroundImageFn: backgroundImageFn,
