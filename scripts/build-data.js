@@ -4,7 +4,7 @@ var fs = require('fs'),
     inflection = require('inflection'),
     mkdirp = require('mkdirp')
 
-var categories = ['People', 'Nature', 'Foods', 'Activity', 'Places', 'Objects', 'Symbols', 'Flags'],
+var categories = ['People'],
     data = { categories: [], emojis: {}, skins: {}, short_names: {} },
     categoriesIndex = {}
 
@@ -74,9 +74,7 @@ emojiData.forEach((datum) => {
 
   datum.search = datum.search.join(',')
 
-  if (datum.category == 'Skin Tones') {
-    data.skins[datum.short_name] = datum
-  } else {
+  if (datum.category == 'People') {
     categoryIndex = categoriesIndex[category]
     data.categories[categoryIndex].emojis.push(datum.short_name)
     data.emojis[datum.short_name] = datum
@@ -95,10 +93,12 @@ emojiData.forEach((datum) => {
   delete datum.short_name
   delete datum.category
   delete datum.sort_order
+
+  console.log(datum);
 })
 
-var flags = data.categories[categoriesIndex['Flags']];
-flags.emojis.sort()
+// var flags = data.categories[categoriesIndex['Flags']];
+// flags.emojis.sort()
 
 mkdirp('data', (err) => {
   if (err) throw err

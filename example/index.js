@@ -86,7 +86,7 @@ class Example extends React.Component {
           emojiSize={this.state.emojiSize}
           perLine={this.state.perLine}
           skin={this.state.skin}
-          set={this.state.set}
+          set='native'
           onClick={(emoji) => console.log(emoji)}
         />
       }
