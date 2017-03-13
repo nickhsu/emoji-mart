@@ -4,6 +4,15 @@ var fs = require('fs'),
     inflection = require('inflection'),
     mkdirp = require('mkdirp')
 
+var emojiV6 = JSON.parse(fs.readFileSync('data/emoji_v6.json', 'utf8'))
+
+function unifiedToNative(unified) {
+  var unicodes = unified.split('-'),
+    codePoints = unicodes.map((u) => `0x${u}`)
+
+  return String.fromCodePoint(...codePoints)
+}
+
 var categories = ['People'],
     data = { categories: [], emojis: {}, skins: {}, short_names: {} },
     categoriesIndex = {}
@@ -21,6 +30,11 @@ emojiData.sort((a, b) => {
 })
 
 emojiData.forEach((datum) => {
+  var nativeEmoji = unifiedToNative(datum.unified)
+  if (!emojiV6.includes(nativeEmoji)) {
+    return
+  }
+
   var category = datum.category,
       keywords = [],
       categoryIndex
